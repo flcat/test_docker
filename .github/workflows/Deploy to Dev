@@ -1,0 +1,12 @@
+name: Deploy to Dev
+
+# 액션 조건
+on:
+  # 푸시 했을 때
+  push:
+    # branch : dev
+    branches: [ "dev" ]
+
+# only readable
+permissions:
+  contents: read
