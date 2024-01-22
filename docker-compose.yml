@@ -1,0 +1,25 @@
+version: "3"
+
+services:
+
+  # container_name
+  backend-dev:
+    # dockerhub image 주소
+    image: flcat/test_docker
+    container_name: backend-dev
+    hostname: backend-dev
+    expose:
+      - "8080"
+
+  nginx:
+    # 서비스 종속관계 명시
+    # 다른 컨테이너들도 포함 가능
+    depends_on:
+      - backend-dev
+    restart: always
+    # 빌드 조건 명시
+    build:
+      dockerfile: Dockerfile
+      context: ./config/nginx
+    ports:
+      - "80:443"
