@@ -1,12 +1,14 @@
 ---
 spring:
-  profiles: set1
+  profiles:
+    active: set1
 server:
-  port: 8081
+  port: 8083
 
 ---
 spring:
-  profiles: set2
+  profiles:
+    active: set2
 
 server:
-  port: 8082
+  port: 8084

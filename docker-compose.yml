@@ -1,25 +1,14 @@
 version: "3"
-
 services:
-
-  # container_name
-  backend-dev:
-    # dockerhub image 주소
-    image: flcat/test_docker
-    container_name: backend-dev
-    hostname: backend-dev
-    expose:
-      - "8080"
-
-  nginx:
-    # 서비스 종속관계 명시
-    # 다른 컨테이너들도 포함 가능
-    depends_on:
-      - backend-dev
-    restart: always
-    # 빌드 조건 명시
-    build:
-      dockerfile: Dockerfile
-      context: ./config/nginx
+  web:             # nginx 컨테이너 이름 (원하는 이름)
+    image: nginx
     ports:
-      - "80:443"
+      - 8081:8081
+    volumes:
+      - /etc/nginx/:/etc/nginx/    # Nginx 컨테이너 내부 /etc/nginx 디렉토리가 위에서 설치한 EC2 내부에 /etc/nginx 디렉토리를 참조함
+  spring:         # Spring Boot 컨테이너 이름 (원하는 이름)
+    build: ""
+    ports:
+      - 8083:8080
+    volumes:
+      - ./:/root/
