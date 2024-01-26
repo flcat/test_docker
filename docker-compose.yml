@@ -1,14 +1,23 @@
 version: "3"
 services:
-  web:             # nginx 컨테이너 이름 (원하는 이름)
-    image: nginx
+  nginx:             # nginx 컨테이너 이름 (원하는 이름)
+    image: flcat/nginx:0.4
+    ports:
+      - 80:80
+    container_name: test_nginx
+
+    depends_on:
+      - web
+      - api
+    extra_hosts:
+      - "host.docker,internal:host-gateway"
+  web:
+    image: flcat/web:0.2
     ports:
       - 8081:8081
-    volumes:
-      - /etc/nginx/:/etc/nginx/    # Nginx 컨테이너 내부 /etc/nginx 디렉토리가 위에서 설치한 EC2 내부에 /etc/nginx 디렉토리를 참조함
-  spring:         # Spring Boot 컨테이너 이름 (원하는 이름)
-    build: ""
-    ports:
-      - 8083:8080
-    volumes:
-      - ./:/root/
+    container_name: test_docker-web
+  api:
+      image: flcat/api:0.2
+      ports:
+        - 8080:8080
+      container_name: test_docker-api
