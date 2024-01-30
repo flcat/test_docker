@@ -3,7 +3,7 @@ on: [push]
 jobs:
  build:
          name: Build
-         runs-on: AL2-latest
+         runs-on: amazon-linux2-latest
          steps:
                 - name: executing remote ssh commands using password
                   uses: flcat/ssh-action@master
