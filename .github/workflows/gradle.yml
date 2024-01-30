@@ -5,8 +5,8 @@ jobs:
          name: Build
          runs-on: amazon-linux2-latest
          steps:
-                - name: executing remote ssh commands using password
-                  uses: flcat/ssh-action@master
+                - name: executing remote ssh commands using key-file
+                  uses: flcat/ssh-action@main
                   with:
                         host: ${{ secrets.HOST }}
                         username: ec2-user
