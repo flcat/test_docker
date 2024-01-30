@@ -6,7 +6,7 @@ jobs:
          runs-on: amazon-linux2-latest
          steps:
                 - name: executing remote ssh commands using key-file
-                  uses: flcat/ssh-action@main
+                  uses: appleboy/ssh-action@v1.0.3
                   with:
                         host: ${{ secrets.HOST }}
                         username: ec2-user
