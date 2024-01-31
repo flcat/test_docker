@@ -6,7 +6,7 @@ jobs:
          runs-on: ["self-hosted", "Linux", "X64"]
          steps:
                 - name: executing remote ssh commands using key-file
-                  uses: appleboy/ssh-action@v1.0.3
+                  uses: appleboy/ssh-action@master
                   with:
                         host: ${{ secrets.HOST }}
                         username: ec2-user
