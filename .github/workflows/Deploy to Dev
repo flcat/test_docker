@@ -13,7 +13,7 @@ permissions:
 jobs:
   build:
 # ec2 intance Image
-    runs-on: amazon-linux2-latest
+    runs-on: ["self-hosted", "Linux", "X64"]
 
     steps:
 # java 버전 설정
