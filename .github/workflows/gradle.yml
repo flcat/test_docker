@@ -3,7 +3,7 @@ on: [push]
 jobs:
  build:
          name: Build
-         runs-on: amazon-linux2-latest
+         runs-on: ["self-hosted", "Linux", "X64"]
          steps:
                 - name: executing remote ssh commands using key-file
                   uses: appleboy/ssh-action@v1.0.3
