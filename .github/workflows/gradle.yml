@@ -8,9 +8,9 @@ jobs:
                 - name: executing remote ssh commands using key-file
                   uses: appleboy/ssh-action@master
                   with:
-                        host: ${{ secrets.HOST }}
+                        host: ${{ secrets.HOST_DEV }}
                         username: ec2-user
-                        key: ${{ secrets.KEY }}
+                        key: ${{ secrets.KEY_DEV }}
                         script: |
                             if [ "$(docker ps -qa)" ]; then
                               sudo docker rm -f $(docker ps -qa)
