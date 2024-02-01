@@ -1,4 +1,9 @@
 version: "3"
+  {
+    "features" : {
+       "buildkit": false
+    }
+  }
 services:
   web:
     image: nginx  # 존재하는 nginx 이미지 사용
