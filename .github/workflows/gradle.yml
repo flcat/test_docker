@@ -56,9 +56,9 @@ jobs:
         with:
           context: .
           file: ./Dockerfile
-          platforms: linux/amd64
+          platforms: linux/amd64 --platform=linux/amd64
           push: true
-          tags: ${{ steps.docker_meta.outputs.tags }}
+          # tags: ${{ steps.docker_meta.outputs.tags }}
   CD:
      needs: CI
      runs-on: ubuntu-latest
