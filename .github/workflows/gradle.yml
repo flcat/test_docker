@@ -3,7 +3,7 @@ on: [push]
 jobs:
  build:
          name: Build
-         runs-on: ["self-hosted", "Linux", "X64"]
+         runs-on: self-hosted
          steps:
                 - name: executing remote ssh commands using key-file
                   uses: appleboy/ssh-action@master
