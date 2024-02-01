@@ -1,21 +1,43 @@
-name : remote ssh commands
-on: [push]
+name: CI/CD
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
 jobs:
- build:
-         name: Build
-         runs-on: self-hosted
-         steps:
-                - name: executing remote ssh commands using key-file
-                  uses: appleboy/ssh-action@master
-                  with:
-                        host: ${{ secrets.HOST_DEV }}
-                        username: ubuntu
-                        key: ${{ secrets.KEY_DEV }}
-                        script: |
-                            if [ "$(docker ps -qa)" ]; then
-                              sudo docker rm -f $(docker ps -qa)
-                            fi
-                            sudo docker pull ${{ secrets.DOCKER_REPO }}/flcat/test_docker
-                            sudo docker pull ${{ secrets.DOCKER_REPO }}/nginx
-                            sudo docker-compose -f /home/ec2-user/github/workspace/docker-compose.yml up -d
-                            docker image prune -f
+  CI:
+     runs-on: ubuntu-latest
+	
+     steps:
+      - uses: actions/checkout@v2
+	
+      - name: Run a one-line script
+        run: echo Hello, world!
+	
+      - name: Run a multi-line script
+        run: |
+          echo Add other actions to build,
+          echo test, and deploy your project.
+  CD:
+     needs: CI
+     runs-on: ubuntu-latest
+
+     steps:
+      - uses: actions/checkout@v3
+
+      - name: pull image and run
+        uses: appleboy/ssh-action@master
+        with:
+          key: ${{ secrets.KEY_DEV }}
+          host: ${{ secrets.HOST_DEV }}
+          username: ubuntu
+          script: |
+                  if [ "$(docker ps -qa)" ]; then
+                    sudo docker rm -f $(docker ps -qa)
+                  fi
+                  sudo docker pull ${{ secrets.DOCKER_REPO }}/flcat/test_docker
+                  sudo docker pull ${{ secrets.DOCKER_REPO }}/nginx
+                  sudo docker-compose -f /home/ec2-user/github/workspace/docker-compose.yml up -d
+                  docker image prune -f
