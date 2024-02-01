@@ -10,4 +10,4 @@ COPY ${JAR_PATH}/test-0.0.1-SNAPSHOT.jar ${JAR_PATH}/test-0.0.1-SNAPSHOT.jar
 CMD java -jar -Dspring.profiles.active=${active} test-0.0.1-SNAPSHOT.jar
 
 FROM nginx
-COPY nginx.conf /etc/nginx/nginx.conf
+COPY ./nginx.conf /etc/nginx/nginx.conf
