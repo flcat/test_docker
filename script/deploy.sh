@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # Installing docker engine if not exists
 if ! type docker > /dev/null
