@@ -91,8 +91,8 @@ jobs:
           username: ubuntu
           key: ${{ secrets.KEY_DEV }}
           script: |
-            # sudo systemctl stop docker $(sudo docker ps -aq)
-            sudo systemctl rm docker $(sudo docker ps -aq)
-            sudo systemctl rmi docker $(sudo docker images -q)
+            sudo docker $(sudo docker ps -aq)
+            sudo docker rm $(sudo docker ps -aq)
+            sudo docker rmi $(sudo docker images -q)
             sudo docker-compose -f ~/srv/ubuntu/docker-compose.yml pull
             sudo docker-compose -f ~/srv/ubuntu/docker-compose.yml up --build -d
